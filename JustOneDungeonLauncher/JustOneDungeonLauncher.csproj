@@ -5,11 +5,18 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         
         <UseWPF>true</UseWPF>
+        
+        <ApplicationIcon>Image\DamageBuffIcon.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="LibGit2Sharp" Version="0.27.2" />
       <PackageReference Include="LibGit2Sharp.NativeBinaries" Version="2.0.320" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Image\close-icon.png" />
+      <Resource Include="Image\close-icon.png" />
     </ItemGroup>
 
 </Project>

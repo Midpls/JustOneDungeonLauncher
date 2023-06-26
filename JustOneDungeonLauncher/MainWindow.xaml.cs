@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using LibGit2Sharp;
 using System.Windows.Shapes;
 using Path = System.IO.Path;
@@ -25,6 +26,11 @@ namespace JustOneDungeonLauncher
     /// </summary>
     public partial class MainWindow
     {
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                DragMove();
+        }
         private const string VersionFileLink = "https://dl.dropboxusercontent.com/s/kzvhqeoaiktrq0s/Version.txt?dl=0";
         private const string PatchNotesLink = "https://dl.dropboxusercontent.com/s/9urtsbh7lwp7cek/Patchnotes.txt?dl=0";
         private const string isOnline = "https://dl.dropboxusercontent.com/s/fyufsgafqu6t7y7/isOnline.txt?dl=0";
@@ -327,5 +333,7 @@ namespace JustOneDungeonLauncher
         {
             return $"{major}.{minor}.{subMinor}";
         }
+        
     }
+    
 }

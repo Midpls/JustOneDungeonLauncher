@@ -3,10 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:justOneDungeonLauncher="clr-namespace:JustOneDungeonLauncher"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         ContentRendered="MainWindow_OnContentRendered"
-        Title="Launcher" Height="600" Width="1080">
+        Title="Launcher" MaxHeight="600" MaxWidth="1080" MinHeight="600" MinWidth="1080">
+    
     <Grid> <!--CornflowerBlue-->
         <Grid.Background>CornflowerBlue</Grid.Background>
         <!--<Image RenderOptions.BitmapScalingMode="NearestNeighbor" Height="200" Width="200" Margin="20, 200, 0, 0" Source="images/WhiteBackground.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>-->
@@ -18,6 +22,22 @@
             <Canvas.Margin>0, 70, 520, 0</Canvas.Margin>
             <TextBlock Text="NO PATCHNOTESS!" Canvas.Left="10" Canvas.Top="10" Name="PatchNotesText" FontSize="13" Foreground="Purple" Margin="0, 0, 0, 0" FontStyle="Italic"/>
         </Canvas>
+        <Grid MouseDown="Window_MouseDown">
+            <Grid.Width>1080</Grid.Width>
+            <Grid.Height>25</Grid.Height>
+            <Grid.Background>Black</Grid.Background>
+            <Grid.Opacity>0</Grid.Opacity>
+            <Grid.VerticalAlignment>Top</Grid.VerticalAlignment>
+           </Grid>
         <Button Name="PlayButton" Content="Checking For Updates" Click="PlayButton_OnClick" Width="400" Height="70" FontSize="30" FontStyle="Oblique" Foreground="White" Margin="0, 0, 100, 80" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="BlueViolet" />
+        <Button Background="CornflowerBlue" Click="ExitButton_OnClick">
+            <Button.BorderThickness>0</Button.BorderThickness>
+            <Button.VerticalAlignment>Top</Button.VerticalAlignment>
+            <Button.HorizontalAlignment>Right</Button.HorizontalAlignment>
+            <Button.Width> 20</Button.Width>
+            <Button.Height> 20</Button.Height>
+            <Image Source="Image/close-icon.png"/>
+            
+        </Button>
     </Grid>
 </Window>
