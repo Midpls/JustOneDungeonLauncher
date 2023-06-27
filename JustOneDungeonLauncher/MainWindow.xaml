@@ -20,7 +20,7 @@
             <Canvas.Height>460</Canvas.Height>
             <Canvas.Width>460</Canvas.Width>
             <Canvas.Margin>0, 70, 520, 0</Canvas.Margin>
-            <TextBlock Text="NO PATCHNOTESS!" Canvas.Left="10" Canvas.Top="10" Name="PatchNotesText" FontSize="13" Foreground="Purple" Margin="0, 0, 0, 0" FontStyle="Italic"/>
+            <TextBlock Text="..."  Canvas.Left="10" Canvas.Top="10" Name="PatchNotesText" FontSize="13" Foreground="Purple" Margin="0, 0, 0, 0" FontStyle="Italic"/>
         </Canvas>
         <Grid MouseDown="Window_MouseDown">
             <Grid.Width>1080</Grid.Width>
@@ -30,6 +30,8 @@
             <Grid.VerticalAlignment>Top</Grid.VerticalAlignment>
            </Grid>
         <Button Name="PlayButton" Content="Checking For Updates" Click="PlayButton_OnClick" Width="400" Height="70" FontSize="30" FontStyle="Oblique" Foreground="White" Margin="0, 0, 100, 80" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="BlueViolet" />
+
+        <TextBlock Name="ErrorMessage" Visibility="Hidden" Foreground="Red" Text="Not logged in!" HorizontalAlignment="Center" Margin="0,100,0,0"/>
         <Button Background="CornflowerBlue" Click="ExitButton_OnClick">
             <Button.BorderThickness>0</Button.BorderThickness>
             <Button.VerticalAlignment>Top</Button.VerticalAlignment>
@@ -37,6 +39,42 @@
             <Button.Width> 20</Button.Width>
             <Button.Height> 20</Button.Height>
             <Image Source="Image/close-icon.png"/>
+            
+        </Button>
+        <Button Background="CornflowerBlue" Click="MinimizeButton_Click">
+            <Button.BorderThickness>0</Button.BorderThickness>
+            <Button.VerticalAlignment>Top</Button.VerticalAlignment>
+            <Button.Margin> 0, 0, 30, 0</Button.Margin>
+            <Button.HorizontalAlignment>Right</Button.HorizontalAlignment>
+            <Button.Width> 20</Button.Width>
+            <Button.Height> 20</Button.Height>
+            
+            <Image  Margin="0, 12, 0,0" Source="Image/minus-icon.png"/>
+            
+        </Button>
+        <!-- LOG IN MENUS -->
+        <Canvas Name="OptionsPanel" Visibility="Hidden" IsEnabled="False">
+            <Canvas.Background>BlueViolet</Canvas.Background>
+            <Canvas.Opacity>90</Canvas.Opacity>
+            <Canvas.Width>250</Canvas.Width>
+            <Canvas.Height>200</Canvas.Height>
+            <TextBlock Text="User" Margin="0, 0, 0,0 " Canvas.Top="50" Canvas.Left="50"/>
+            <TextBox Name="UserNameInputText" Text="Input Username" Canvas.Top="70" Canvas.Left="50"/>
+            <Button Canvas.Top="100" Canvas.Left="50" Click="LogIn_Click" Width="50" Height="20" Content="Log in"/>
+            <Button Canvas.Top="100" Canvas.Left="110" Click="LogIn_Click" Width="50" Height="20" Content="Log out"/>
+        </Canvas>
+
+
+        <TextBlock Name="LoggedInText" Width="100" Height="100" Text="Not logged in!" Margin="20,4 ,0,0" VerticalAlignment="Top" />
+
+        <Button Background="CornflowerBlue" Click="LogInMenu_Click">
+            <Button.BorderThickness>0</Button.BorderThickness>
+            <Button.VerticalAlignment>Top</Button.VerticalAlignment>
+            <Button.Margin> 0, 0, 60, 0</Button.Margin>
+            <Button.HorizontalAlignment>Right</Button.HorizontalAlignment>
+            <Button.Width> 20</Button.Width>
+            <Button.Height> 20</Button.Height>
+            <Image Source="Image/three-horizontal-lines-icon.png"/>
             
         </Button>
     </Grid>

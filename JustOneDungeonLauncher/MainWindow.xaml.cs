@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using LibGit2Sharp;
 using System.Windows.Shapes;
@@ -18,7 +19,8 @@ namespace JustOneDungeonLauncher
         failed,
         downloadingGame,
         downloadingUpdate,
-        ServerOffline
+        ServerOffline,
+        NotLoggedIn
     }
 
     /// <summary>
@@ -72,6 +74,9 @@ namespace JustOneDungeonLauncher
                         break;
                     case LauncherStatus.ServerOffline:
                         PlayButton.Content = "Server Not Reachable - Retry";
+                        break;
+                    case LauncherStatus.NotLoggedIn:
+                        PlayButton.Content = "Not logged in - Retry";
                         break;
                 }
             }
@@ -134,10 +139,13 @@ namespace JustOneDungeonLauncher
             
         }
 
-        private void ShowPatchNotes(string Notes)
+        private void ShowPatchNotesAsync()
         {
-            if (Notes == "") return;
-            PatchNotesText.Text = Notes;
+            WebClient client = new WebClient();
+            var Task = System.Threading.Tasks.Task.Run(() => client.DownloadStringTaskAsync(PatchNotesLink));
+            Task.Wait();
+            PatchNotesText.Text = Task.Result;
+
         }
         
         private void InstallGameFiles(bool _isUpdate, Version _onlineVersion)
@@ -148,13 +156,11 @@ namespace JustOneDungeonLauncher
                 if (_isUpdate)
                 {
                     Status = LauncherStatus.downloadingUpdate;
-                    ShowPatchNotes(webClient.DownloadString(PatchNotesLink));
                 }
                 else
                 {
                     Status = LauncherStatus.downloadingGame;
                     _onlineVersion = new Version(webClient.DownloadString(VersionFileLink));
-                    ShowPatchNotes(webClient.DownloadString(PatchNotesLink));
                 }
 
                 currentVersion = _onlineVersion;
@@ -224,7 +230,6 @@ namespace JustOneDungeonLauncher
         }
         private void MainWindow_OnContentRendered(object sender, EventArgs e)
         {
-            MessageBox.Show("HI");
             try
             {
                 appData = Path.Combine(Directory.GetParent(appDataRoaming).ToString());
@@ -239,6 +244,7 @@ namespace JustOneDungeonLauncher
                 MessageBox.Show($"{ex}");
             }
 
+            ShowPatchNotesAsync();
             CheckForUpdates();
         }
 
@@ -257,6 +263,11 @@ namespace JustOneDungeonLauncher
             }
             if (Status == LauncherStatus.ready)
             {
+                if (!isLoggedIn)
+                {
+                    Status = LauncherStatus.NotLoggedIn;
+                    return;
+                }
                 ProcessStartInfo startinfo = new ProcessStartInfo(gameExe);
                 startinfo.WorkingDirectory = Path.Combine(saveDataPath);
                 Process.Start(startinfo);
@@ -272,6 +283,70 @@ namespace JustOneDungeonLauncher
         private void ExitButton_OnClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+        
+
+        private void LogInMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeLoginMenu();
+        }
+
+        private void ChangeLoginMenu()
+        {
+            OptionsPanel.IsEnabled = !OptionsPanel.IsEnabled;
+            if (OptionsPanel.IsEnabled)
+            {
+                OptionsPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                OptionsPanel.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private bool isLoggedIn;
+
+        private void LogIn_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserNameInputText.Text != "")
+            {
+                if (_status == LauncherStatus.NotLoggedIn)
+                {
+                    Status = LauncherStatus.ready;
+                }
+
+                LoggedInText.Text = UserNameInputText.Text; 
+                isLoggedIn = true;
+                ChangeLoginMenu();
+            } 
+        }
+
+        private bool errorIsActive;
+        /// <summary>
+        /// Shows an error according to which one in the middle of the screen as red text
+        /// </summary>
+        /// <param name="which">0 is not logged in error</param>
+        private void initErrorMessage(int which)
+        {
+            StopLastError();
+            errorIsActive = true;
+            ErrorMessage.Visibility = Visibility.Visible;
+            switch (which)
+            {
+                case 0: Status = LauncherStatus.NotLoggedIn;
+                    break;
+            }
+        }
+
+        private void StopLastError()
+        {
+            ErrorMessage.Visibility = Visibility.Hidden;
+            errorIsActive = false;
         }
     }
 

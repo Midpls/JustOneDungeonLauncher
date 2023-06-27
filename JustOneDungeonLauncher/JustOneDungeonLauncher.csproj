@@ -17,6 +17,12 @@
     <ItemGroup>
       <None Remove="Image\close-icon.png" />
       <Resource Include="Image\close-icon.png" />
+      <None Remove="Image\DamageBuffIcon.ico" />
+      <Resource Include="Image\DamageBuffIcon.ico" />
+      <None Remove="Image\minus-icon.png" />
+      <Resource Include="Image\minus-icon.png" />
+      <None Remove="Image\three-horizontal-lines-icon.png" />
+      <Resource Include="Image\three-horizontal-lines-icon.png" />
     </ItemGroup>
 
 </Project>
