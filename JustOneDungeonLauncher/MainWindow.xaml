@@ -13,6 +13,7 @@
     
     <Grid> <!--CornflowerBlue-->
         <Grid.Background>CornflowerBlue</Grid.Background>
+        <TextBlock Name="LoggedInText" Width="400" TextAlignment="Center" Height="20" Text="No User" Margin="20,4 ,0,0" VerticalAlignment="Top" />
         <!--<Image RenderOptions.BitmapScalingMode="NearestNeighbor" Height="200" Width="200" Margin="20, 200, 0, 0" Source="images/WhiteBackground.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>-->
         <TextBlock Text="PATCH NOTES:"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" Foreground="Purple" Margin="50, 50, 100, 0" FontStyle="Italic"/>
         <TextBlock Text="0.2.2" Name="VersionText" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20"  Foreground="Orange" Margin="5, 50, 0, 0" FontStyle="Italic"/>
@@ -59,13 +60,11 @@
             <Canvas.Width>250</Canvas.Width>
             <Canvas.Height>200</Canvas.Height>
             <TextBlock Text="User" Margin="0, 0, 0,0 " Canvas.Top="50" Canvas.Left="50"/>
-            <TextBox Name="UserNameInputText" Text="Input Username" Canvas.Top="70" Canvas.Left="50"/>
+            <TextBox Name="UserNameInputText" MinWidth="80" Canvas.Top="70" Canvas.Left="50"/>
             <Button Canvas.Top="100" Canvas.Left="50" Click="LogIn_Click" Width="50" Height="20" Content="Log in"/>
-            <Button Canvas.Top="100" Canvas.Left="110" Click="LogIn_Click" Width="50" Height="20" Content="Log out"/>
+            <Button Canvas.Top="100" Canvas.Left="110" Click="LogOut_Click" Width="50" Height="20" Content="Log out"/>
         </Canvas>
 
-
-        <TextBlock Name="LoggedInText" Width="100" Height="100" Text="Not logged in!" Margin="20,4 ,0,0" VerticalAlignment="Top" />
 
         <Button Background="CornflowerBlue" Click="LogInMenu_Click">
             <Button.BorderThickness>0</Button.BorderThickness>

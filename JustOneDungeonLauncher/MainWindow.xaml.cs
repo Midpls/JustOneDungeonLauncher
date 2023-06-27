@@ -256,6 +256,8 @@ namespace JustOneDungeonLauncher
                 Status = LauncherStatus.ServerOffline;
                 return;
             }
+
+            if (Status == LauncherStatus.NotLoggedIn) return;
             if (isUpdating) return;
             if (!File.Exists(gameExe))
             {
@@ -320,7 +322,7 @@ namespace JustOneDungeonLauncher
                     Status = LauncherStatus.ready;
                 }
 
-                LoggedInText.Text = UserNameInputText.Text; 
+                LoggedInText.Text = "Current user: " + UserNameInputText.Text + "(EU)"; 
                 isLoggedIn = true;
                 ChangeLoginMenu();
             } 
@@ -339,6 +341,7 @@ namespace JustOneDungeonLauncher
             switch (which)
             {
                 case 0: Status = LauncherStatus.NotLoggedIn;
+                    ErrorMessage.Text = "Not logged in yet!";
                     break;
             }
         }
@@ -347,6 +350,13 @@ namespace JustOneDungeonLauncher
         {
             ErrorMessage.Visibility = Visibility.Hidden;
             errorIsActive = false;
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            LoggedInText.Text = "No User"; 
+            isLoggedIn = false;
+            ChangeLoginMenu();
         }
     }
 
