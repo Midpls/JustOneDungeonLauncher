@@ -315,7 +315,7 @@ namespace JustOneDungeonLauncher
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            if (UserNameInputText.Text != "")
+            if (UserNameInputText.Text != "" && UserNameInputText.Text.Length <= 15)
             {
                 if (_status == LauncherStatus.NotLoggedIn)
                 {
@@ -326,6 +326,17 @@ namespace JustOneDungeonLauncher
                 isLoggedIn = true;
                 ChangeLoginMenu();
             } 
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            if (Status == LauncherStatus.ready)
+            {
+                Status = LauncherStatus.NotLoggedIn;
+                isLoggedIn = false;
+                LoggedInText.Text = "User: None";
+                ChangeLoginMenu();
+            }
         }
 
         private bool errorIsActive;
@@ -351,13 +362,7 @@ namespace JustOneDungeonLauncher
             ErrorMessage.Visibility = Visibility.Hidden;
             errorIsActive = false;
         }
-
-        private void LogOut_Click(object sender, RoutedEventArgs e)
-        {
-            LoggedInText.Text = "No User"; 
-            isLoggedIn = false;
-            ChangeLoginMenu();
-        }
+        
     }
 
     struct Version

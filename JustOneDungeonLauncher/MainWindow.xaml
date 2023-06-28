@@ -10,18 +10,31 @@
         WindowStartupLocation="CenterScreen"
         ContentRendered="MainWindow_OnContentRendered"
         Title="Launcher" MaxHeight="600" MaxWidth="1080" MinHeight="600" MinWidth="1080">
-    
     <Grid> <!--CornflowerBlue-->
         <Grid.Background>CornflowerBlue</Grid.Background>
-        <TextBlock Name="LoggedInText" Width="400" TextAlignment="Center" Height="20" Text="No User" Margin="20,4 ,0,0" VerticalAlignment="Top" />
         <!--<Image RenderOptions.BitmapScalingMode="NearestNeighbor" Height="200" Width="200" Margin="20, 200, 0, 0" Source="images/WhiteBackground.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>-->
         <TextBlock Text="PATCH NOTES:"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" Foreground="Purple" Margin="50, 50, 100, 0" FontStyle="Italic"/>
-        <TextBlock Text="0.2.2" Name="VersionText" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20"  Foreground="Orange" Margin="5, 50, 0, 0" FontStyle="Italic"/>
+        <TextBlock  Name="LoggedInText" Text="User: None"  FontSize="20" Foreground="Purple" Margin="640, 0, 0, 320" FontStyle="Italic" Width="410" Height="30" TextAlignment="Left"/>
+            <TextBlock Text="0.2.2" Name="VersionText" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20"  Foreground="Orange" Margin="5, 50, 0, 0" FontStyle="Italic"/>
         <Canvas>
             <Canvas.Height>460</Canvas.Height>
             <Canvas.Width>460</Canvas.Width>
             <Canvas.Margin>0, 70, 520, 0</Canvas.Margin>
-            <TextBlock Text="..."  Canvas.Left="10" Canvas.Top="10" Name="PatchNotesText" FontSize="13" Foreground="Purple" Margin="0, 0, 0, 0" FontStyle="Italic"/>
+            <ScrollViewer>
+                <!--
+                <ScrollViewer.Style>
+                    <Style TargetType="{x:Type RepeatButton}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                    </Style>
+                </ScrollViewer.Style>
+                -->
+                <TextBlock  TextWrapping="Wrap" Text="..."  Name="PatchNotesText" FontSize="13" Foreground="Purple" Margin="0, 0, 0, 0" FontStyle="Italic"/>    
+                <ScrollViewer.Height> 460</ScrollViewer.Height>
+                <ScrollViewer.Width> 460</ScrollViewer.Width>
+                <ScrollViewer.HorizontalScrollBarVisibility>Auto</ScrollViewer.HorizontalScrollBarVisibility>
+            </ScrollViewer>
+            
+            
         </Canvas>
         <Grid MouseDown="Window_MouseDown">
             <Grid.Width>1080</Grid.Width>
@@ -30,7 +43,27 @@
             <Grid.Opacity>0</Grid.Opacity>
             <Grid.VerticalAlignment>Top</Grid.VerticalAlignment>
            </Grid>
-        <Button Name="PlayButton" Content="Checking For Updates" Click="PlayButton_OnClick" Width="400" Height="70" FontSize="30" FontStyle="Oblique" Foreground="White" Margin="0, 0, 100, 80" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="BlueViolet" />
+        <Button Name="PlayButton" Content="Checking For Updates" Click="PlayButton_OnClick" Width="400" Height="70" FontSize="30" FontStyle="Oblique" Foreground="White" Margin="0, 0, 100, 80" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="BlueViolet">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="LightBlue" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="LightBlue" TargetName="Border" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
 
         <TextBlock Name="ErrorMessage" Visibility="Hidden" Foreground="Red" Text="Not logged in!" HorizontalAlignment="Center" Margin="0,100,0,0"/>
         <Button Background="CornflowerBlue" Click="ExitButton_OnClick">
@@ -53,23 +86,25 @@
             <Image  Margin="0, 12, 0,0" Source="Image/minus-icon.png"/>
             
         </Button>
+        
+        
         <!-- LOG IN MENUS -->
         <Canvas Name="OptionsPanel" Visibility="Hidden" IsEnabled="False">
             <Canvas.Background>BlueViolet</Canvas.Background>
             <Canvas.Opacity>90</Canvas.Opacity>
             <Canvas.Width>250</Canvas.Width>
             <Canvas.Height>200</Canvas.Height>
+            <Canvas.Margin>475,0,0,0</Canvas.Margin>
             <TextBlock Text="User" Margin="0, 0, 0,0 " Canvas.Top="50" Canvas.Left="50"/>
-            <TextBox Name="UserNameInputText" MinWidth="80" Canvas.Top="70" Canvas.Left="50"/>
+            <TextBox Name="UserNameInputText" Text="Input Username" Canvas.Top="70" Canvas.Left="50"/>
             <Button Canvas.Top="100" Canvas.Left="50" Click="LogIn_Click" Width="50" Height="20" Content="Log in"/>
             <Button Canvas.Top="100" Canvas.Left="110" Click="LogOut_Click" Width="50" Height="20" Content="Log out"/>
         </Canvas>
 
-
         <Button Background="CornflowerBlue" Click="LogInMenu_Click">
             <Button.BorderThickness>0</Button.BorderThickness>
             <Button.VerticalAlignment>Top</Button.VerticalAlignment>
-            <Button.Margin> 0, 0, 60, 0</Button.Margin>
+            <Button.Margin> 0, 160, 405, 0</Button.Margin>
             <Button.HorizontalAlignment>Right</Button.HorizontalAlignment>
             <Button.Width> 20</Button.Width>
             <Button.Height> 20</Button.Height>
