@@ -23,6 +23,8 @@
       <Resource Include="Image\minus-icon.png" />
       <None Remove="Image\three-horizontal-lines-icon.png" />
       <Resource Include="Image\three-horizontal-lines-icon.png" />
+      <None Remove="Image\male-icon.png" />
+      <Resource Include="Image\male-icon.png" />
     </ItemGroup>
 
 </Project>

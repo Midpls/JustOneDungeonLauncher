@@ -315,14 +315,14 @@ namespace JustOneDungeonLauncher
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            if (UserNameInputText.Text != "" && UserNameInputText.Text.Length <= 15)
+            if (UserNameInputText.Text != "" && UserNameInputText.Text.Length <= 13)
             {
                 if (_status == LauncherStatus.NotLoggedIn)
                 {
                     Status = LauncherStatus.ready;
                 }
 
-                LoggedInText.Text = "Current user: " + UserNameInputText.Text + "(EU)"; 
+                LoggedInText.Text = "Current user: " + UserNameInputText.Text + " (EU)"; 
                 isLoggedIn = true;
                 ChangeLoginMenu();
             } 

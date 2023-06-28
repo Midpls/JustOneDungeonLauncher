@@ -10,6 +10,26 @@
         WindowStartupLocation="CenterScreen"
         ContentRendered="MainWindow_OnContentRendered"
         Title="Launcher" MaxHeight="600" MaxWidth="1080" MinHeight="600" MinWidth="1080">
+    <Window.Resources>
+        <Style x:Key="HoverBlack" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="LightBlue" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Black" TargetName="Border" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </Window.Resources>
     <Grid> <!--CornflowerBlue-->
         <Grid.Background>CornflowerBlue</Grid.Background>
         <!--<Image RenderOptions.BitmapScalingMode="NearestNeighbor" Height="200" Width="200" Margin="20, 200, 0, 0" Source="images/WhiteBackground.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>-->
@@ -95,21 +115,31 @@
             <Canvas.Width>250</Canvas.Width>
             <Canvas.Height>200</Canvas.Height>
             <Canvas.Margin>475,0,0,0</Canvas.Margin>
-            <TextBlock Text="User" Margin="0, 0, 0,0 " Canvas.Top="50" Canvas.Left="50"/>
-            <TextBox Name="UserNameInputText" Text="Input Username" Canvas.Top="70" Canvas.Left="50"/>
+            <TextBlock Text="User name:" Margin="0, 0, 0,0 " Canvas.Top="50" Canvas.Left="50"/>
+            <TextBox Name="UserNameInputText" MinWidth="100" MaxWidth="100" MaxLength="13" MaxLines="1" Canvas.Top="70" Canvas.Left="50"/>
             <Button Canvas.Top="100" Canvas.Left="50" Click="LogIn_Click" Width="50" Height="20" Content="Log in"/>
             <Button Canvas.Top="100" Canvas.Left="110" Click="LogOut_Click" Width="50" Height="20" Content="Log out"/>
         </Canvas>
 
-        <Button Background="CornflowerBlue" Click="LogInMenu_Click">
+        
+        <Button Style="{StaticResource HoverBlack}" Background="CornflowerBlue" Click="LogInMenu_Click">
+            
             <Button.BorderThickness>0</Button.BorderThickness>
             <Button.VerticalAlignment>Top</Button.VerticalAlignment>
-            <Button.Margin> 0, 160, 405, 0</Button.Margin>
+            <Button.Margin> 0, 100, 400, 0</Button.Margin>
             <Button.HorizontalAlignment>Right</Button.HorizontalAlignment>
             <Button.Width> 20</Button.Width>
             <Button.Height> 20</Button.Height>
-            <Image Source="Image/three-horizontal-lines-icon.png"/>
+            
+            <Image Source="Image/male-icon.png"/>
             
         </Button>
+        <Border>
+            <Border.BorderBrush>BlueViolet</Border.BorderBrush>
+            <Border.BorderThickness>3</Border.BorderThickness>
+            <Border.Margin>260 0, 0, 380</Border.Margin>
+            <Border.Height>30</Border.Height>
+            <Border.Width>30</Border.Width>
+        </Border>
     </Grid>
 </Window>
