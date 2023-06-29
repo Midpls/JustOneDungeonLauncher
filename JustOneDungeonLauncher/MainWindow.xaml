@@ -11,38 +11,9 @@
         ContentRendered="MainWindow_OnContentRendered"
         Title="Launcher" MaxHeight="600" MaxWidth="1080" MinHeight="600" MinWidth="1080">
     <Window.Resources>
-        
-        <Style x:Key="RepeatButtonCollapsed" TargetType="{x:Type RepeatButton}">
+        <Style TargetType="{x:Type RepeatButton}">
+            <Setter Property="OverridesDefaultStyle" Value="True"></Setter>
             <Setter Property="Visibility" Value="Collapsed"/>
-        </Style>
-        
-       <Style x:Key="Tmp" TargetType="{x:Type ScrollViewer}">
-           <Setter Property="Template">
-               
-           </Setter>
-       </Style>
-        <!-- style for scrollview without repeat buttons-->
-       
-        <ControlTemplate x:Key="ScrollViewer" TargetType="{x:Type ScrollViewer}">
-            <RepeatButton Style="{StaticResource RepeatButtonCollapsed}"/>
-        </ControlTemplate>
-                         <!-- style for button -->
-        <Style x:Key="HoverBlack" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="LightBlue" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="Border" Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Purple" TargetName="Border" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
         </Style>
         
     </Window.Resources>
@@ -56,18 +27,13 @@
             <Canvas.Height>460</Canvas.Height>
             <Canvas.Width>460</Canvas.Width>
             <Canvas.Margin>0, 70, 520, 0</Canvas.Margin>
-            <ScrollViewer >
-                <!--
-                <ScrollViewer.Style>
-                    <Style TargetType="{x:Type RepeatButton}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                    </Style>
-                </ScrollViewer.Style>
-                -->
-                <TextBlock  TextWrapping="Wrap" Text="..."  Name="PatchNotesText" FontSize="13" Foreground="Purple" Margin="0, 0, 0, 0" FontStyle="Italic"/>    
+            <ScrollViewer>
+                
+                <TextBlock  TextWrapping="Wrap" Text="..."  Name="PatchNotesText" FontSize="13" Foreground="Purple" Margin="0, 0, 0, 0" FontStyle="Italic"/>  
                 <ScrollViewer.Height> 460</ScrollViewer.Height>
                 <ScrollViewer.Width> 460</ScrollViewer.Width>
                 <ScrollViewer.HorizontalScrollBarVisibility>Auto</ScrollViewer.HorizontalScrollBarVisibility>
+                
             </ScrollViewer>
             
             
@@ -138,7 +104,7 @@
         </Canvas>
 
         
-        <Button Style="{StaticResource HoverBlack}" Background="CornflowerBlue" Click="LogInMenu_Click">
+        <Button Background="CornflowerBlue" Click="LogInMenu_Click">
             
             <Button.BorderThickness>0</Button.BorderThickness>
             <Button.VerticalAlignment>Top</Button.VerticalAlignment>
