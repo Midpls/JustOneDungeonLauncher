@@ -18,9 +18,7 @@
         
        <Style x:Key="Tmp" TargetType="{x:Type ScrollViewer}">
            <Setter Property="Template">
-               <Setter.Value>
-                   
-               </Setter.Value>
+               
            </Setter>
        </Style>
         <!-- style for scrollview without repeat buttons-->
